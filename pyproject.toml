@@ -12,6 +12,8 @@ python = "^3.10"
 Sphinx = "^6.1.3"
 libsass = "^0.22.0"
 beautifulsoup4 = "^4.12.0"
+html2text = "^2020.1.16"
+pydash = "^6.0.2"
 
 
 [build-system]
@@ -19,7 +21,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.plugins."sphinx.builders"]
-vivlioStyle="sphinx_vivlioStyle.builders.vivlioStyle"
+vivliostyle="sphinx_vivlioStyle.builders.vivliostyle"
 
 [tool.poetry.plugins."sphinx.html_themes"]
 vivlioStyle_theme="sphinx_vivlioStyle.themes.vivlioStyle_theme"

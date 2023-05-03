@@ -4,7 +4,7 @@ import subprocess
 
 from docutils.nodes import Node
 from docutils import nodes
-from .translator import vivlioStyleTransrator
+from .translator import vivliostyleTransrator
 
 from docutils.io import StringOutput
 from io import open
@@ -17,7 +17,7 @@ from sphinx.application import Sphinx
 
 logger = logging.getLogger(__name__)
 
-class vivlioStyleBuilder(SingleFileHTMLBuilder):
+class vivliostyleBuilder(SingleFileHTMLBuilder):
     name = "vivliostyle"
     format = "vfm"  # Must be html instead of "pdf", otherwise plantuml has problems
     epilog = __('The markdown files are in %(outdir)s.')
@@ -27,17 +27,17 @@ class vivlioStyleBuilder(SingleFileHTMLBuilder):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.app.config.vivlioStyle_theme is not None:
-            print(f"Setting theme to {self.app.config.vivlioStyle_theme}")
-            self.app.config.html_theme = self.app.config.vivlioStyle_theme
+        if self.app.config.vivliostyle_theme is not None:
+            print(f"Setting theme to {self.app.config.vivliostyle_theme}")
+            self.app.config.html_theme = self.app.config.vivliostyle_theme
 
         # We need to overwrite some config values, as they are set for the normal html build, but
-        # vivlioStyle can normally not handle them.
-        self.app.config.html_sidebars = self.app.config.vivlioStyle_sidebars;
-        self.app.config.html_theme_options = self.app.config.vivlioStyle_theme_options;  # Sphinx would write warnings, if given options are unsupported.
+        # vivliostyle can normally not handle them.
+        self.app.config.html_sidebars = self.app.config.vivliostyle_sidebars;
+        self.app.config.html_theme_options = self.app.config.vivliostyle_theme_options;  # Sphinx would write warnings, if given options are unsupported.
 
-        # Add vivlioStyle specific functions to the html_context. Mostly needed for printing debug information.
-        self.app.config.html_context['vivlioStyle_debug'] = self.config['vivlioStyle_debug']
+        # Add vivliostyle specific functions to the html_context. Mostly needed for printing debug information.
+        self.app.config.html_context['vivliostyle_debug'] = self.config['vivliostyle_debug']
         self.app.config.html_permalinks=False
 
     def get_config_var(self, name, default):
@@ -51,10 +51,10 @@ class vivlioStyleBuilder(SingleFileHTMLBuilder):
 
         Returns: Value
         """
-        vivlioStyle_vars = self.app.config.vivlioStyle_vars
-        if name not in vivlioStyle_vars:
+        vivliostyle_vars = self.app.config.vivliostyle_vars
+        if name not in vivliostyle_vars:
             return default
-        return vivlioStyle_vars[name]
+        return vivliostyle_vars[name]
 
     def get_theme_option_var(self, name, default):
         """
@@ -67,10 +67,10 @@ class vivlioStyleBuilder(SingleFileHTMLBuilder):
 
         Returns: Value
         """
-        vivlioStyle_theme_options = self.app.config.vivlioStyle_theme_options
-        if name not in vivlioStyle_theme_options:
+        vivliostyle_theme_options = self.app.config.vivliostyle_theme_options
+        if name not in vivliostyle_theme_options:
             return default
-        return vivlioStyle_theme_options[name]
+        return vivliostyle_theme_options[name]
     
     def write_additional_files(self):
         super().write_additional_files()
@@ -101,13 +101,13 @@ class vivlioStyleBuilder(SingleFileHTMLBuilder):
 
         args = [ 'vivliostyle','build' ]
 
-        #if isinstance(self.config['vivlioStyle_flags'], list) and (0 < len(self.config['vivlioStyle_flags'])) :
-            #args.extend(self.config['vivlioStyle_flags'])
+        #if isinstance(self.config['vivliostyle_flags'], list) and (0 < len(self.config['vivliostyle_flags'])) :
+            #args.extend(self.config['vivliostyle_flags'])
 
-        timeout = self.config['vivlioStyle_timeout']
+        timeout = self.config['vivliostyle_timeout']
 
         
-        retries = self.config['vivlioStyle_retries']
+        retries = self.config['vivliostyle_retries']
 
         for n in range(1 + retries):
             try:
@@ -121,18 +121,18 @@ class vivlioStyleBuilder(SingleFileHTMLBuilder):
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
-    app.set_translator('vivliostyle',vivlioStyleTransrator)
-    app.add_config_value("vivlioStyle_vars", {}, "html", types=[dict])
-    app.add_config_value("vivlioStyle_file_name", None, "html", types=[str])
-    app.add_config_value("vivlioStyle_debug", False, "html", types=bool)
-    app.add_config_value("vivlioStyle_timeout", None, "html", types=[int])
-    app.add_config_value("vivlioStyle_retries", 0, "html", types=[int])
-    app.add_config_value("vivlioStyle_flags", None, "html", types=[list])
-    app.add_config_value("vivlioStyle_theme", "vivlioStyle_theme", "html", types=[str])
-    app.add_config_value("vivlioStyle_theme_options", {}, "html", types=[dict])
-    app.add_config_value("vivlioStyle_sidebars", {'**': ["localtoc.html"]}, "html", types=[dict])
-    app.add_builder(vivlioStyleBuilder)
-    app.connect("html-page-context",vivlioStyleBuilder.author_add)
+    app.set_translator('vivliostyle',vivliostyleTransrator)
+    app.add_config_value("vivliostyle_vars", {}, "html", types=[dict])
+    app.add_config_value("vivliostyle_file_name", None, "html", types=[str])
+    app.add_config_value("vivliostyle_debug", False, "html", types=bool)
+    app.add_config_value("vivliostyle_timeout", None, "html", types=[int])
+    app.add_config_value("vivliostyle_retries", 0, "html", types=[int])
+    app.add_config_value("vivliostyle_flags", None, "html", types=[list])
+    app.add_config_value("vivliostyle_theme", "vivliostyle_theme", "html", types=[str])
+    app.add_config_value("vivliostyle_theme_options", {}, "html", types=[dict])
+    app.add_config_value("vivliostyle_sidebars", {'**': ["localtoc.html"]}, "html", types=[dict])
+    app.add_builder(vivliostyleBuilder)
+    app.connect("html-page-context",vivliostyleBuilder.author_add)
 
     return {
         "parallel_read_safe": True,

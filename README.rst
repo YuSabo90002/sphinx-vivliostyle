@@ -1,10 +1,10 @@
-Sphinx-VivlioStyle
+sphinx-vivliostyle
 ==================
 
-SphinxをVivlioStyleを使用してpdfを生成します。
+SphinxをVivliostyleを使用してpdfを生成します。
 
 required
 ----------
 
-#. VivlioStyle
+#. Vivliostyle
 

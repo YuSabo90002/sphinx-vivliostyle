@@ -5,7 +5,7 @@ description = ""
 authors = ["Yu <batfish.ikimono@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
-packages = [{include = "sphinx_vivlioStyle"}]
+packages = [{include = "sphinx_vivliostyle"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -21,7 +21,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.plugins."sphinx.builders"]
-vivliostyle="sphinx_vivlioStyle.builders.vivliostyle"
+vivliostyle="sphinx_vivliostyle.builders.vivliostyle"
 
 [tool.poetry.plugins."sphinx.html_themes"]
-vivlioStyle_theme="sphinx_vivlioStyle.themes.vivlioStyle_theme"
+vivliostyle_theme="sphinx_vivliostyle.themes.vivliostyle_theme"

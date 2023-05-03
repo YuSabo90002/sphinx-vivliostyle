@@ -5,7 +5,7 @@ from docutils.nodes import Element, Node,Text,document
 from sphinx import addnodes
 import re
 
-class vivlioStyleTransrator(HTMLTranslator):
+class vivliostyleTransrator(HTMLTranslator):
     def __init__(self, document: document, builder: Builder) -> None:
         super().__init__(document, builder)
         self.section_level=-1

@@ -2,7 +2,7 @@
 name = "sphinx-vivliostyle"
 version = "0.1.0"
 description = ""
-authors = ["Yu <batfish.ikimono@gmail.com>"]
+authors = ["YuSabo <yusabo90002@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
 packages = [{include = "sphinx_vivliostyle"}]
